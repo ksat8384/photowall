@@ -1,7 +1,7 @@
 import React from "react";
 
 function Photo(props) {
-  const { post } = props;
+  const { post, onRemovePhoto } = props;
 
   return (
     <figure className="figure">
@@ -10,7 +10,14 @@ function Photo(props) {
         <p>{post.description}</p>
       </figcaption>
       <div className="button-container">
-        <button className="remove-button">Remove</button>
+        <button
+          className="remove-button"
+          onClick={() => {
+            onRemovePhoto(post);
+          }}
+        >
+          Remove
+        </button>
       </div>
     </figure>
   );
