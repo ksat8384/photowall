@@ -1,0 +1,40 @@
+html {
+  font-size: 10px;
+}
+
+h1 {
+  font-family: "billabong";
+  text-align: center;
+  font-size: 13rem;
+  font-weight: 100;
+  margin: 2rem 0;
+  letter-spacing: -1px;
+  color: black;
+}
+
+@font-face {
+  font-family: "billabong";
+  src: url("https://cdn.rawgit.com/milktronics/beaglegr.am/master/public/fonts/billabong-webfont.eot?#iefix")
+      format("embedded-opentype"),
+    url("https://cdn.rawgit.com/milktronics/beaglegr.am/master/public/fonts/billabong-webfont.woff")
+      format("woff"),
+    url("https://cdn.rawgit.com/milktronics/beaglegr.am/master/public/fonts/billabong-webfont.ttf")
+      format("truetype"),
+    url("https://cdn.rawgit.com/milktronics/beaglegr.am/master/public/fonts/billabong-webfont.svg#billabongregular")
+      format("svg");
+}
+
+.photoGrid {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.figure {
+  flex-basis: calc(33.33% - 4rem);
+  border: 1px solid #d3d3d3;
+  padding: 2rem;
+  flex-grow: 1;
+  margin: 0 2rem 2rem 2rem;
+}
