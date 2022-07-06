@@ -1,9 +1,20 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
-class AddPhoto extends Component { 
-    render() { 
-        return <h1>This is the page where we will add photos</h1>
-    }
+class AddPhoto extends Component {
+  render() {
+    return (
+      <div>
+        <h1>Photowall</h1>
+        <div class="form">
+          <form>
+            <input type="text" placeholder="Link" />
+            <input type="text" placeholder="Description" />
+            <button>Post</button>
+          </form>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default AddPhoto;
