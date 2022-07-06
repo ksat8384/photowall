@@ -1,19 +1,15 @@
 import React from "react";
 import Photo from "./Photo";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 //anchor tag, href attribute
 function Photowall(props) {
   const { posts, onRemovePhoto, onNavigate } = props;
   return (
     <div>
-      <a className="addIcon" onClick={onNavigate} href="#AddPhoto">
+      <Link className="addIcon" to="/AddPhoto">
         Add
-      </a>
-
-      {/* <button onClick={onNavigate} className="addIcon">
-        {" "}
-        +{" "}
-      </button> */}
+      </Link>
       <div className="photoGrid">
         {posts.map((post, index) => (
           <Photo post={post} key={index} onRemovePhoto={onRemovePhoto} />
