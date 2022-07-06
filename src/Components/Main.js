@@ -43,6 +43,12 @@ class Main extends Component {
     }));
   }
 
+  addPhoto(postSubmitted) {
+    this.setState((state) => ({
+      posts: state.posts.concat([postSubmitted]),
+    }));
+  }
+
   componentDidMount() {
     // const posts = simulateFetchFromDatabase();
     // this.setState({ posts: posts });
@@ -74,7 +80,17 @@ class Main extends Component {
           )}
         />
 
-        <Route path="/addPhoto" component={AddPhoto} />
+        <Route
+          path="/addPhoto"
+          render={({ history }) => (
+            <AddPhoto
+              onAddPhoto={(addedPost) => {
+                this.addPhoto(addedPost);
+                history.push("/");
+              }}
+            />
+          )}
+        />
       </div>
     );
   }
