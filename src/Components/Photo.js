@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function Photo(props) {
-  const { post } = props;
+  const { post, index } = props;
 
   return (
     <figure className="figure">
@@ -13,7 +13,7 @@ function Photo(props) {
       <div className="button-container">
         <button
           onClick={() => {
-            props.removePost(1)
+            props.removePost(index)
           }}
         >
           Remove
