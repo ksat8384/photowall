@@ -3,6 +3,7 @@ import Photowall from "./PhotoWall";
 import AddPhoto from "./AddPhoto";
 import { Route } from "react-router-dom";
 import { Link } from "react-router-dom";
+import Single from "./Single";
 
 class Main extends Component {
   constructor() {
@@ -10,7 +11,6 @@ class Main extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div>
         <h1>
@@ -28,9 +28,12 @@ class Main extends Component {
 
         <Route
           path="/addPhoto"
-          render={({ history }) => (
-            <AddPhoto {...this.props} />
-          )}
+          render={({ history }) => <AddPhoto {...this.props} />}
+        />
+
+        <Route
+          path="/single/:id"
+          render={(params) => <Single {...this.props} {...params} />}
         />
       </div>
     );
