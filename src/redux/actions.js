@@ -1,8 +1,15 @@
 import { database } from "../database/config";
-import { getDatabase, ref, child, push, update } from "firebase/database";
+import {
+  getDatabase,
+  ref,
+  child,
+  push,
+  update,
+  onValue,
+} from "firebase/database";
 export function startAddingPost(post) {
   return (dispatch) => {
-    return update(ref(database), { [post.id]: post })
+    return update(ref(database, "posts"), { [post.id]: post })
       .then(() => {
         // Data saved successfully!
         console.log("updated database with new post");
@@ -12,6 +19,25 @@ export function startAddingPost(post) {
         // The write failed...
         console.log("error", error);
       });
+  };
+}
+
+export function startLoadingPost() {
+  return (dispatch) => {
+    return onValue(
+      ref(database, "posts"),
+      (snapshot) => {
+        let posts = [];
+        snapshot.forEach((childSnapshot) => {
+          console.log("childSnapshot.val()>>", childSnapshot.val());
+          posts.push(childSnapshot.val());
+        });
+        dispatch(loadPosts(posts));
+      },
+      {
+        onlyOnce: true,
+      }
+    );
   };
 }
 
@@ -36,5 +62,12 @@ export function addComment(comment, postId) {
     type: "ADD_COMMENT",
     comment,
     postId,
+  };
+}
+
+export function loadPosts(posts) {
+  return {
+    type: "LOAD_POSTS",
+    posts,
   };
 }

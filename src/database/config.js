@@ -21,6 +21,4 @@ const app = initializeApp(firebaseConfig);
 
 const database = getDatabase(app);
 
-console.log("database", database)
-
 export { database };
