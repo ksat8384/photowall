@@ -6,6 +6,7 @@ import {
   push,
   update,
   onValue,
+  remove,
 } from "firebase/database";
 export function startAddingPost(post) {
   return (dispatch) => {
@@ -38,6 +39,14 @@ export function startLoadingPost() {
         onlyOnce: true,
       }
     );
+  };
+}
+
+export function startRemovingPost(index, id) {
+  return (dispatch) => {
+    return remove(ref(database, `posts/${id}`)).then(() => {
+      dispatch(removePost(index));
+    });
   };
 }
 
