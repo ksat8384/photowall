@@ -7,7 +7,25 @@ import {
   update,
   onValue,
   remove,
+  set,
 } from "firebase/database";
+
+export function startAddingComment(comment, postId) {
+  return (dispatch) => {
+    const commentListRef = ref(database, `comments/${postId}`);
+    push(commentListRef, comment)
+      .then(() => {
+        // Data saved successfully!
+        console.log("updated database with the comment");
+        dispatch(addComment(comment, postId));
+      })
+      .catch((error) => {
+        // The write failed...
+        console.log("error", error);
+      });
+  };
+}
+
 export function startAddingPost(post) {
   return (dispatch) => {
     return update(ref(database, "posts"), { [post.id]: post })
