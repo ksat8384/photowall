@@ -82,9 +82,23 @@ export function startLoadingComments() {
 
 export function startRemovingPost(index, id) {
   return (dispatch) => {
-    return remove(ref(database, `posts/${id}`)).then(() => {
-      dispatch(removePost(index));
-    });
+    //To delete both post and the comment node associated with it
+    const updates = {
+      [`posts/${id}`]: null,
+      [`comments/${id}`]: null,
+    };
+    return update(ref(database), updates)
+      .then(() => {
+        dispatch(removePost(index));
+      })
+      .catch((error) => {
+        // The delete failed...
+        console.log("error", error);
+      });
+
+    // return remove(ref(database, `posts/${id}`)).then(() => {
+    //   dispatch(removePost(index));
+    // });
   };
 }
 
