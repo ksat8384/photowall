@@ -12,6 +12,7 @@ class Main extends Component {
 
   componentDidMount() {
     this.props.startLoadingPost();
+    this.props.startLoadingComments();
   }
 
   render() {

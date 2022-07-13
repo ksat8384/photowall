@@ -5,7 +5,6 @@ class Comments extends Component {
     super();
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
   handleSubmit(event) {
     event.preventDefault();
     const comment = event.target.elements.comment.value;

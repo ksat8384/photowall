@@ -60,6 +60,26 @@ export function startLoadingPost() {
   };
 }
 
+export function startLoadingComments() {
+  return (dispatch) => {
+    return onValue(
+      ref(database, "comments"),
+      (snapshot) => {
+        let comments = {};
+        snapshot.forEach((childSnapshot) => {
+          console.log("childSnapshot.key>>", childSnapshot.key);
+          console.log("childSnapshot.val()>>", childSnapshot.val());
+          comments[childSnapshot.key] = Object.values(childSnapshot.val());
+        });
+        dispatch(loadComments(comments));
+      },
+      {
+        onlyOnce: true,
+      }
+    );
+  };
+}
+
 export function startRemovingPost(index, id) {
   return (dispatch) => {
     return remove(ref(database, `posts/${id}`)).then(() => {
@@ -96,5 +116,12 @@ export function loadPosts(posts) {
   return {
     type: "LOAD_POSTS",
     posts,
+  };
+}
+
+export function loadComments(comments) {
+  return {
+    type: "LOAD_COMMENTS",
+    comments,
   };
 }
