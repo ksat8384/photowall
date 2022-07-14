@@ -43,20 +43,23 @@ export function startAddingPost(post) {
 
 export function startLoadingPost() {
   return (dispatch) => {
-    return onValue(
-      ref(database, "posts"),
-      (snapshot) => {
-        let posts = [];
-        snapshot.forEach((childSnapshot) => {
-          console.log("childSnapshot.val()>>", childSnapshot.val());
-          posts.push(childSnapshot.val());
-        });
-        dispatch(loadPosts(posts));
-      },
-      {
-        onlyOnce: true,
-      }
-    );
+    return new Promise((resolve, reject) => {
+      onValue(
+        ref(database, "posts"),
+        (snapshot) => {
+          let posts = [];
+          snapshot.forEach((childSnapshot) => {
+            console.log("childSnapshot.val()>>", childSnapshot.val());
+            posts.push(childSnapshot.val());
+          });
+          dispatch(loadPosts(posts));
+          resolve(posts);
+        },
+        {
+          onlyOnce: true,
+        }
+      );
+    });
   };
 }
 
