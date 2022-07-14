@@ -12,7 +12,7 @@ class Single extends Component {
 
     if (this.props.loading === true) {
       return <div className="loader">...loading</div>;
-    } else {
+    } else if (post) {
       return (
         <div className="single-photo">
           <Photo post={post} {...this.props} index={index} />
@@ -23,6 +23,8 @@ class Single extends Component {
           />
         </div>
       );
+    } else {
+      return <h1>...no post found</h1>;
     }
   }
 }
